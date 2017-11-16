@@ -1,0 +1,6 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^data-raw$
+^Thumbs.db$
+^CONTRIBUTING.md$
+^CODE_OF_CONDUCT.md$
