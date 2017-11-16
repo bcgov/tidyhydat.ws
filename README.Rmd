@@ -1,26 +1,41 @@
 ---
-title: "tidyhydat.ws: An introduction"
-author: "Sam Albers"
-date: "`r Sys.Date()`"
-#output:
-#  md_document:
-#    variant: markdown_github
 output:
-  html_vignette:
-     keep_md: true
-vignette: >
-  %\VignetteIndexEntry{tidyhydat}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+  github_document:
+    html_preview: true
 ---
-## Load packages
-```{r}
-library(tidyhydat.ws)
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+    
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
 ```
+
+# tidyhydat.ws
+
+
+  
+<div id="devex-badge"><a rel="Exploration" href="https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.md"><img alt="Being designed and built, but in the lab. May change, disappear, or be buggy." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/exploration.svg" title="Being designed and built, but in the lab. May change, disappear, or be buggy." /></a> [![Travis-CI Build Status](https://travis-ci.org/bcgov-c/tidyhydat.ws.svg?branch=master)](https://travis-ci.org/bcgov-c/tidyhydat.ws) </div>
+
+
+## Project Status
+
+This package is maintained by the Knowledge Management Branch of the [British Columbia Ministry of Environment and Climate Change Strategy](https://www2.gov.bc.ca/gov/content/governments/organizational-structure/ministries-organizations/ministries/environment-climate-change).
+
+## Installation
+```{r, eval=FALSE}
+#install.packages("remotes")
+remotes::install_github("bcgov-c/tidyhdyat.ws")
+```
+
 
 ## Water Office web service - `realtime_ws()` 
 The National Hydrological Service has recently introduced an efficient service from which to query real-time data. The `realtime_ws()` function, which provides a convenient way to import this data into R, introduces two new arguments that impact the data that is returned. The web service provides additional data beyond simply hydrometric information. This is specified using the `parameters` argument as an integer code. The corresponding parameters can be examined using the internal `param_id` dataset:
 ```{r, echo=TRUE, eval=TRUE}
+library(tidyhydat.ws)
 data("param_id")
 param_id
 ```
@@ -64,3 +79,34 @@ Now these values can be accessed within an R session without giving away your se
 - *Type of parameters*: `realtime_dd()` is restricted to river flow (either LEVEL and FLOW) data. In contrast `realtime_ws()` can download several different parameters depending on what is available for that station. See `data("param_id")` for a list and explanation of the parameters.
 - *Date/Time filtering*: `realtime_ws()` provides argument to select a date range. Selecting a data range with `realtime_dd()` is not possible until after all files have been downloaded. 
 - *Accessibility*: `realtime_dd()` downloads data that openly accessible. `realtime_ws()` downloads data using a username and password which must be provided by ECCC. 
+
+
+## Getting Help or Reporting an Issue
+
+To report bugs/issues/feature requests, please file an [issue](https://github.com/ropensci/tidyhydat/issues/).
+
+These are very welcome!
+
+## How to Contribute
+
+If you would like to contribute to the package, please see our 
+[CONTRIBUTING](CONTRIBUTING.md) guidelines.
+  
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+
+## License
+  
+  Copyright 2017 Province of British Columbia
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at 
+  
+  http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  
