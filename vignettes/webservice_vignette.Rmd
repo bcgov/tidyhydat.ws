@@ -22,7 +22,7 @@ library(tidyhydat.ws)
 The National Hydrological Service has recently introduced an efficient service from which to query real-time data. The `realtime_ws()` function, which provides a convenient way to import this data into R, introduces two new arguments that impact the data that is returned. The web service provides additional data beyond simply hydrometric information. This is specified using the `parameters` argument as an integer code. The corresponding parameters can be examined using the internal `param_id` dataset:
 ```{r, echo=TRUE, eval=TRUE}
 data("param_id")
-param_id
+param_id[1:4]
 ```
 The `parameters` argument will take any value in the `param_id$Parameter` column. The web service requires credentials to access which can only be requested from ECCC. To retrieve data in this manner, `tidyhydat` employs a two stage process whereby we get a token from the web service using our credentials then use that token to access the web service. Therefore the second new argument is `token` the value of which is provided by `token_ws()`:
   
@@ -54,7 +54,7 @@ WS_USRNM = "here is the username that ECCC gave you"
 WS_PWD = "here is the password that ECCC gave you"
 ```
 
-Now these values can be accessed within an R session without giving away your secrets (Using `Sys.getenv()`). For `ws_token()` they are called automatically each time you use the function. 
+Now these values can be accessed within an R session without giving away your secrets. For `token_ws()` they are called automatically each time you use the function. 
 
 ## Compare `realtime_ws` and `realtime_dd`
 `tidyhydat` provides two methods to download real-time data. `realtime_ws()`, coupled with `token_ws()`, is an API client for a web service hosted by ECCC. `realtime_dd()` provides a function to import openly accessible .csv files from [here](http://dd.weather.gc.ca/hydrometric/). `realtime_ws()` has several difference to `realtime_dd()`. These include:
