@@ -15,7 +15,7 @@ Installation
 
 ``` r
 #install.packages("remotes")
-remotes::install_github("bcgov-c/tidyhdyat.ws")
+remotes::install_github("bcgov-c/tidyhydat.ws")
 ```
 
 Water Office web service - `realtime_ws()`

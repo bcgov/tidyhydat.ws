@@ -28,7 +28,7 @@ This package is maintained by the Knowledge Management Branch of the [British Co
 ## Installation
 ```{r, eval=FALSE}
 #install.packages("remotes")
-remotes::install_github("bcgov-c/tidyhdyat.ws")
+remotes::install_github("bcgov-c/tidyhydat.ws")
 ```
 
 
