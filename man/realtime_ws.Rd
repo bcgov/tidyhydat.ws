@@ -33,10 +33,11 @@ realtime_ws(station_number, parameters = c(46, 16, 52, 47, 8, 5, 41, 18),
 }
 \description{
 Function to actually retrieve data from ECCC web service. Before using this function,
-a token from \code{token_ws()} is needed. The maximum number of days that can be
-queried depends on other parameters being requested. If one station is requested, 18
-months of data can be requested. If you continually receiving errors when invoking this
-function, reduce the number of observations (via station_number, parameters or dates) being requested.
+a token from \code{token_ws()} is needed. \code{realtime_ws} will let you know if the token has expired.
+The maximum number of days that can be queried depends on other parameters being requested.
+If one station is requested, 18 months of data can be requested. If you continually receiving
+errors when invoking this function, reduce the number of observations (via station_number,
+parameters or dates) being requested.
 }
 \examples{
 \dontrun{

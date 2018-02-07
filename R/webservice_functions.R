@@ -44,8 +44,10 @@ token_ws <- function(username = NULL, password = NULL) {
   )
   r <- httr::POST("https://wateroffice.ec.gc.ca/services/auth", body = login)
 
+  time_token <- Sys.time()
+
   ## A workaround that pauses for the connection
-  Sys.sleep(2)
+  #Sys.sleep(2)
 
   ## If the POST request was not a successful, print out why.
   ## Possibly could provide errors as per web service guidelines
@@ -65,21 +67,24 @@ token_ws <- function(username = NULL, password = NULL) {
   ## Catch all error for anything not covered above.
   httr::stop_for_status(r)
 
-  message(paste0("This token will expire at ", format(Sys.time() + 10 * 60, "%H:%M:%S")))
+  message(paste0("This token will expire at ", format(time_token + 10 * 60, "%H:%M:%S")))
 
   ## Extract token from POST
   token <- httr::content(r, "text", encoding = "UTF-8")
 
-  token
+  attr(token, 'time') <- time_token
+
+  return(token)
   }
 
 #' Download realtime data from the ECCC web service [EXPERIMENTAL]
 #'
 #' Function to actually retrieve data from ECCC web service. Before using this function,
-#' a token from \code{token_ws()} is needed. The maximum number of days that can be
-#' queried depends on other parameters being requested. If one station is requested, 18
-#' months of data can be requested. If you continually receiving errors when invoking this
-#' function, reduce the number of observations (via station_number, parameters or dates) being requested.
+#' a token from \code{token_ws()} is needed. \code{realtime_ws} will let you know if the token has expired.
+#' The maximum number of days that can be queried depends on other parameters being requested.
+#' If one station is requested, 18 months of data can be requested. If you continually receiving
+#' errors when invoking this function, reduce the number of observations (via station_number,
+#' parameters or dates) being requested.
 #'
 #' @param station_number Water Survey of Canada station number.
 #' @param parameters parameter ID. Can take multiple entries. Parameter is a numeric code. See \code{param_id} for options. Defaults to all parameters.
@@ -124,9 +129,18 @@ realtime_ws <- function(station_number, parameters = c(46, 16, 52, 47, 8, 5, 41,
                         start_date = Sys.Date() - 30, end_date = Sys.Date(), token) {
   if (length(station_number) >= 300) {
     stop("Only 300 stations are supported for one request. If more stations are required,
-         a separate request should be issued to include the excess stations. This second request will
-         require an additional token.")
+         a separate request should be issued to include the excess stations. This second request can
+         be issued on the same token if it isn't required.")
   }
+
+
+  ## Check to see if the token is expired
+  time_token <- attr(token, 'time')
+  if(format(time_token + 10 * 60) < Sys.time()){
+    stop("Your token has expired. Retrieve a new one using token_ws()")
+  }
+
+
 
 
   ## Check date is in the right format
@@ -150,7 +164,7 @@ realtime_ws <- function(station_number, parameters = c(46, 16, 52, 47, 8, 5, 41,
   station_string <- paste0("stations[]=", station_number, collapse = "&")
   parameters_string <- paste0("parameters[]=", parameters, collapse = "&")
   date_string <- paste0("start_date=", start_date, "%2000:00:00&end_date=", end_date, "%2023:59:59")
-  token_string <- paste0("token=", token)
+  token_string <- paste0("token=", token[1])
 
   ## paste them all together
   url_for_GET <- paste0(
@@ -188,18 +202,7 @@ realtime_ws <- function(station_number, parameters = c(46, 16, 52, 47, 8, 5, 41,
     get_ws,
     type = "text/csv",
     encoding = "UTF-8",
-    col_types = readr::cols(
-      ID = readr::col_character(),
-      Date = readr::col_datetime(),
-      Parameter = readr::col_integer(),
-      Value = readr::col_double(),
-      Grade = readr::col_character(),
-      Symbol = readr::col_character(),
-      Approval = readr::col_integer()
-    )
-  )
-
-
+    col_types = "cTidcci")
 
   ## Check here to see if csv_df has any data in it
   if (nrow(csv_df) == 0) {
@@ -207,7 +210,8 @@ realtime_ws <- function(station_number, parameters = c(46, 16, 52, 47, 8, 5, 41,
   }
 
   ## Rename columns to reflect tidyhydat naming
-  csv_df <- dplyr::rename(csv_df, STATION_NUMBER = ID)
+  colnames(csv_df) <- c("STATION_NUMBER","Date","Parameter","Value","Grade","Symbol","Approval")
+
   csv_df <- dplyr::left_join(
     csv_df,
     dplyr::select(param_id, -Name_Fr),

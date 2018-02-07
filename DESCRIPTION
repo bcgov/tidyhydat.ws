@@ -1,7 +1,7 @@
 Package: tidyhydat.ws
 Type: Package
 Title: Access ECCC Webservice
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(person("Sam", "Albers", email = "sam.albers@gov.bc.ca", role = c("aut", "cre"),
            ), person("Province of British Columbia", role = "cph"))
 Description: A stand alone package that is a client to the ECCC webservice.
