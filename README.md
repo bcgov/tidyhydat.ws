@@ -3,7 +3,7 @@
 tidyhydat.ws
 ============
 
-<a rel="Exploration" href="https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.md"><img alt="Being designed and built, but in the lab. May change, disappear, or be buggy." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/exploration.svg" title="Being designed and built, but in the lab. May change, disappear, or be buggy." /></a> [![Travis-CI Build Status](https://travis-ci.org/bcgov-c/tidyhydat.ws.svg?branch=master)](https://travis-ci.org/bcgov-c/tidyhydat.ws)
+<a rel="Exploration" href="https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.md"><img alt="Being designed and built, but in the lab. May change, disappear, or be buggy." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/exploration.svg" title="Being designed and built, but in the lab. May change, disappear, or be buggy." /></a>
 
 Project Status
 --------------
@@ -79,7 +79,7 @@ ws_test <- realtime_ws(station_number = "08LG006",
                        token = token_out)
 ```
 
-Tokens only last for 10 minutes and users can only have 5 tokens at once. Therefore it is best to query the web service a little as possible by being efficient and strategic with your queries. `realtime_ws()` will only return data that is available. A message is returned if a particular station was not available. `parameters`, `start_date` and `end_date` fail silently if the station does not collect that parameter or data on that date. The web service constrains queries to be under 60 days and fewer than 300 stations. If more data is required, multiple queries should be made and combined using a function like `rbind()`.
+Tokens only last for 10 minutes and users can only have 5 tokens at once. Therefore it is best to query the web service a little as possible by being efficient and strategic with your queries. `realtime_ws()` will only return data that is available. A message is returned if a particular station was not available. `parameters`, `start_date` and `end_date` fail silently if the station does not collect that parameter or data on that date. The web service constrains queries to be under 60 days and fewer than 300 stations. If more data is required, multiple queries should be made and combined using a function like `rbind()` or `dplyr::bind_rows()`.
 
 ### Managing your credentials in R
 
@@ -89,7 +89,7 @@ Because you are accessing the web service using credentials and potentially will
 file.edit("~/.Renviron")
 ```
 
-This opens your `.Renviron` file which where you enter the credentials given to you by ECCC. The code that you paste into the `.Renviron` file might look like something like this:
+This opens your `.Renviron` file which where you enter the credentials given to you by ECCC. The code that you paste into the `.Renviron` file should look like something like this:
 
 ``` r
 ## Credentials for ECCC web service
@@ -97,7 +97,7 @@ WS_USRNM = "here is the username that ECCC gave you"
 WS_PWD = "here is the password that ECCC gave you"
 ```
 
-Now these values can be accessed within an R session without giving away your secrets (Using `Sys.getenv()`). For `ws_token()` they are called automatically each time you use the function.
+Now these values can be accessed within an R session without giving away your secrets (Using `Sys.getenv()`). For `token_ws()` they are called automatically each time you use the function.
 
 Compare `realtime_ws` and `realtime_dd`
 ---------------------------------------
