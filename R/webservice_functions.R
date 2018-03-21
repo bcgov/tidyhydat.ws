@@ -127,11 +127,11 @@ token_ws <- function(username = NULL, password = NULL) {
 
 realtime_ws <- function(station_number, parameters = c(46, 16, 52, 47, 8, 5, 41, 18),
                         start_date = Sys.Date() - 30, end_date = Sys.Date(), token) {
-  if (length(station_number) >= 300) {
-    stop("Only 300 stations are supported for one request. If more stations are required,
-         a separate request should be issued to include the excess stations. This second request can
-         be issued on the same token if it isn't required.")
-  }
+  #if (length(station_number) >= 300) {
+  #  stop("Only 300 stations are supported for one request. If more stations are required,
+  #       a separate request should be issued to include the excess stations. This second request can
+  #       be issued on the same token if it isn't required.")
+  #}
 
 
   ## Check to see if the token is expired
