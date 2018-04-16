@@ -1,3 +1,12 @@
+tidyhydat.ws 0.1.2
+
+### Minor improvement
+
+* Removed 300 station limit
+* Using rlang internally
+* Added package level documentation
+* Adding a check at package load if the password env variables are set
+
 tidyhydat.ws 0.1.1 
 =========================
 

@@ -1,26 +1,9 @@
 .onLoad <-
-  function(libname = find.package("tidyhydat"),
-           pkgname = "tidyhydat") {
-    # CRAN Note avoidance
-    if (getRversion() >= "2.15.1")
-      utils::globalVariables(
-        # Vars used in Non-Standard Evaluations, declare here to avoid CRAN warnings
-        ## This is getting ridiculous
-        c("ID",
-          "param_id",
-          "Name_Fr",
-          "STATION_NUMBER",
-          "Date",
-          "Name_En",
-          "Value",
-          "Unit",
-          "Grade",
-          "Symbol",
-          "Approval",
-          "Parameter",
-          "Code",
-          "." # piping requires '.' at times
-        )
-      )
-    invisible()
+ function(libname = find.package("tidyhydat"),
+          pkgname = "tidyhydat") {
+  if(!nzchar(Sys.getenv("WS_USRNM")) | !nzchar(Sys.getenv("WS_PWD"))){
+    packageStartupMessage("You do not have your webservice credentials setup. For directions please run:")
+    packageStartupMessage("vignette('setup_webservice_credentials', package = 'tidyhydat.ws')")
   }
+ }
+
