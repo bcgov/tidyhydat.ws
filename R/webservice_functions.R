@@ -33,6 +33,11 @@
 
 token_ws <- function(username = NULL, password = NULL) {
 
+  ## Fail if the environmental variables aren't set
+  if(!nzchar(Sys.getenv("WS_USRNM"))) stop("No environment variable for username assigned to WS_USRNM in .Renviron file", call. = TRUE)
+  if(!nzchar(Sys.getenv("WS_PWD"))) stop("No environment variable for password assigned to WS_PWD in .Renviron file", call. = TRUE)
+
+
   if(is.null(username) | is.null(password)){
     username <- Sys.getenv("WS_USRNM")
     password <- Sys.getenv("WS_PWD")
