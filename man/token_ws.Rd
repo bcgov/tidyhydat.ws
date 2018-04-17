@@ -14,7 +14,7 @@ Request a token from the ECCC web service using the POST method. This token expi
 You can only have 5 tokens out at once.}
 }
 \value{
-The token as a string that should be supplied the \code{download_ws_realtime} function.
+The token as a string that should be supplied the \code{realtime_ws} function.
 }
 \description{
 Request a token from the Environment and Climate Change Canada [EXPERIMENTAL]
@@ -23,7 +23,7 @@ Request a token from the Environment and Climate Change Canada [EXPERIMENTAL]
 The \code{username} and \code{password} should be treated carefully and should never be entered directly into an r script or console.
 Rather these credentials should be stored in your \code{.Renviron} file. The .Renviron file can edited using \code{file.edit("~/.Renviron")}.
 In that file, which is only stored locally and is only available to you, you can assign your \code{username} to WS_USRNM and \code{password}
-to WS_PWD and then simply issue \code{token_ws}. See \code{?download_ws} for examples.
+to WS_PWD and then simply issue \code{token_ws}. See \code{?realtime_ws} for examples.
 }
 \seealso{
 Other realtime functions: \code{\link{realtime_ws}}
