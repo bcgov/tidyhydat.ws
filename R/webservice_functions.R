@@ -47,7 +47,8 @@ token_ws <- function(username = NULL, password = NULL) {
     username = username,
     password = password
   )
-  r <- httr::POST("https://wateroffice.ec.gc.ca/services/auth", body = login)
+  r <- httr::POST("https://wateroffice.ec.gc.ca/services/auth", body = login,
+                  httr::user_agent(paste0("tidyhydat.ws v", packageVersion("tidyhydat.ws"))))
 
   time_token <- Sys.time()
 
@@ -181,7 +182,7 @@ realtime_ws <- function(station_number, parameters = c(46, 16, 52, 47, 8, 5, 41,
   )
 
   ## Get data
-  get_ws <- httr::GET(url_for_GET)
+  get_ws <- httr::GET(url_for_GET, httr::user_agent(paste0("tidyhydat.ws v", packageVersion("tidyhydat.ws"))))
 
   ## Give webservice some time
   Sys.sleep(1)

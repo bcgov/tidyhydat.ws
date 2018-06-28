@@ -1,4 +1,14 @@
+tidyhydat.ws 0.1.3
+=========================
+
+### Minor improvement
+
+* Added user agent to identify HTTP requests coming from tidyhydat.ws
+
+
+
 tidyhydat.ws 0.1.2
+=========================
 
 ### Minor improvement
 
