@@ -16,7 +16,9 @@ Suggests:
     ggplot2,
     knitr,
     rmarkdown,
-    testthat
+    testthat,
+    webmockr,
+    vcr
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
