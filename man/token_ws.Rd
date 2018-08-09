@@ -28,3 +28,4 @@ to WS_PWD and then simply issue \code{token_ws}. See \code{?realtime_ws} for exa
 \seealso{
 Other realtime functions: \code{\link{realtime_ws}}
 }
+\concept{realtime functions}
