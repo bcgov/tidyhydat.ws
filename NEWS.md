@@ -1,3 +1,8 @@
+tidyhydat.ws 0.1.4
+=========================
+* Added the ability to request times to `realtime_ws`.
+
+
 tidyhydat.ws 0.1.3
 =========================
 
