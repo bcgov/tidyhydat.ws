@@ -11,9 +11,9 @@
 
 ## Project Status
 
-This package is maintained by the Knowledge Management Branch of the
-[British Columbia Ministry of Environment and Climate Change
-Strategy](https://www2.gov.bc.ca/gov/content/governments/organizational-structure/ministries-organizations/ministries/environment-climate-change).
+This package is maintained by the Data Science and Analytics Branch of
+the [British Columbia Ministry of Citizens’
+Services](https://www2.gov.bc.ca/gov/content/governments/organizational-structure/ministries-organizations/ministries/citizens-services).
 
 ## Installation
 
@@ -37,24 +37,24 @@ internal `param_id` dataset:
 library(tidyhydat.ws)
 data("param_id")
 param_id
-#>   Parameter Code                     Name_En
-#> 1        46   HG     Water level provisional
-#> 2        16  HG2       Secondary water level
-#> 3        52  HG3        Tertiary water level
-#> 4        47   QR       Discharge Provisional
-#> 5         8  QRS           Discharge, sensor
-#> 6         5   TW           Water temperature
-#> 7        41  TW2 Secondary water temperature
-#> 8        18   PC   Accumulated precipitation
-#>                              Name_Fr Unit
-#> 1            Niveau d'eau temporaire    m
-#> 2            Niveau d'eau secondaire    m
-#> 3             Niveau d'eau tertiaire    m
-#> 4                D<e9>bit temporaire m3/s
-#> 5                  D<e9>bit, capteur m3/s
-#> 6            Temp<e9>rature de l'eau degC
-#> 7 Temp<e9>rature de l'eau secondaire degC
-#> 8    Pr<e9>cipitations accumul<e9>es   mm
+#>   Parameter Code                     Name_En                            Name_Fr
+#> 1        46   HG     Water level provisional            Niveau d'eau temporaire
+#> 2        16  HG2       Secondary water level            Niveau d'eau secondaire
+#> 3        52  HG3        Tertiary water level             Niveau d'eau tertiaire
+#> 4        47   QR       Discharge Provisional                D<e9>bit temporaire
+#> 5         8  QRS           Discharge, sensor                  D<e9>bit, capteur
+#> 6         5   TW           Water temperature            Temp<e9>rature de l'eau
+#> 7        41  TW2 Secondary water temperature Temp<e9>rature de l'eau secondaire
+#> 8        18   PC   Accumulated precipitation    Pr<e9>cipitations accumul<e9>es
+#>   Unit
+#> 1    m
+#> 2    m
+#> 3    m
+#> 4 m3/s
+#> 5 m3/s
+#> 6 degC
+#> 7 degC
+#> 8   mm
 #>                                                                                         Description_En
 #> 1 Height, stage, elevation of the water surface at a specified station above some arbitrary zero datum
 #> 2                     Height, stage, additional secondary water level reading at the specified station
