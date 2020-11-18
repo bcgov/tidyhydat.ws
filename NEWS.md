@@ -1,3 +1,7 @@
+tidyhydat.ws 0.1.5
+=========================
+* Make `realtime_ws` more flexible by allowing any numeric parameter input. 
+
 tidyhydat.ws 0.1.4
 =========================
 * Added the ability to request times to `realtime_ws`.
