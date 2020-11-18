@@ -3,7 +3,8 @@
 \name{realtime_ws}
 \alias{realtime_ws}
 \title{Download realtime data from the ECCC web service}
-\format{A tibble with 6 variables:
+\format{
+A tibble with 6 variables:
 \describe{
   \item{STATION_NUMBER}{Unique 7 digit Water Survey of Canada station number}
   \item{Date}{Observation date and time. Formatted as a POSIXct class as UTC for consistency.}
@@ -15,15 +16,23 @@
   \item{Approval}{future use}
   \item{Parameter}{Numeric parameter code}
   \item{Code}{Letter parameter code}
-}}
+}
+}
 \usage{
-realtime_ws(station_number, parameters = c(46, 16, 52, 47, 8, 5, 41, 18),
-  start_date = Sys.Date() - 30, end_date = Sys.Date(), token)
+realtime_ws(
+  station_number,
+  parameters = NULL,
+  start_date = Sys.Date() - 30,
+  end_date = Sys.Date(),
+  token
+)
 }
 \arguments{
 \item{station_number}{Water Survey of Canada station number.}
 
-\item{parameters}{parameter ID. Can take multiple entries. Parameter is a numeric code. See \code{param_id} for options. Defaults to all parameters.}
+\item{parameters}{parameter ID. Can take multiple entries. Parameter is a numeric code. See \code{param_id}
+for some options though undocumented parameters may be implemented. Defaults to Water level provisional, Secondary water level,
+Tertiary water level, Discharge Provisional, Discharge, sensor, Water temperature, Secondary water temperature, Accumulated precipitation}
 
 \item{start_date}{Accepts either YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.
 If only start date is supplied (i.e. YYYY-MM-DD) values are returned from the start of that day.
@@ -59,6 +68,7 @@ fivedays <- realtime_ws(station_number = c("08NL071","08NM174"),
 }
 }
 \seealso{
-Other realtime functions: \code{\link{token_ws}}
+Other realtime functions: 
+\code{\link{token_ws}()}
 }
 \concept{realtime functions}

@@ -96,7 +96,9 @@ token_ws <- function(username = NULL, password = NULL) {
 #' parameters or dates) being requested.
 #'
 #' @param station_number Water Survey of Canada station number.
-#' @param parameters parameter ID. Can take multiple entries. Parameter is a numeric code. See \code{param_id} for options. Defaults to all parameters.
+#' @param parameters parameter ID. Can take multiple entries. Parameter is a numeric code. See \code{param_id}
+#' for some options though undocumented parameters may be implemented. Defaults to Water level provisional, Secondary water level,
+#' Tertiary water level, Discharge Provisional, Discharge, sensor, Water temperature, Secondary water temperature, Accumulated precipitation
 #' @param start_date Accepts either YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.
 #' If only start date is supplied (i.e. YYYY-MM-DD) values are returned from the start of that day.
 #' Defaults to 30 days before current date. Time is supplied in UTC.
@@ -138,7 +140,7 @@ token_ws <- function(username = NULL, password = NULL) {
 #' @export
 
 
-realtime_ws <- function(station_number, parameters = c(46, 16, 52, 47, 8, 5, 41, 18),
+realtime_ws <- function(station_number, parameters = NULL,
                         start_date = Sys.Date() - 30, end_date = Sys.Date(), token) {
   #if (length(station_number) >= 300) {
   #  stop("Only 300 stations are supported for one request. If more stations are required,
@@ -146,6 +148,10 @@ realtime_ws <- function(station_number, parameters = c(46, 16, 52, 47, 8, 5, 41,
   #       be issued on the same token if it isn't required.")
   #}
   #browser()
+
+  if (is.null(parameters)) parameters <- c(46, 16, 52, 47, 8, 5, 41, 18)
+
+  if (!is.numeric(parameters)) stop("parameters should be a number", call. = FALSE)
 
 
   ## Check to see if the token is expired

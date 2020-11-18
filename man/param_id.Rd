@@ -4,14 +4,16 @@
 \name{param_id}
 \alias{param_id}
 \title{Parameter ID}
-\format{A tibble with 8 rows and 7 variables:
+\format{
+A tibble with 8 rows and 7 variables:
 \describe{
   \item{Parameter}{Numeric parameter code}
   \item{Code}{Letter parameter code}
   \item{Name_En}{Code name in English}
   \item{Name_En}{Code name in French}
   \item{Unit}{Parameter units}
-}}
+}
+}
 \usage{
 param_id
 }

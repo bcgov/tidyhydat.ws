@@ -26,6 +26,7 @@ In that file, which is only stored locally and is only available to you, you can
 to WS_PWD and then simply issue \code{token_ws}. See \code{?realtime_ws} for examples.
 }
 \seealso{
-Other realtime functions: \code{\link{realtime_ws}}
+Other realtime functions: 
+\code{\link{realtime_ws}()}
 }
 \concept{realtime functions}
