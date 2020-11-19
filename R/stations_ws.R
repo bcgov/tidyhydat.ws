@@ -113,7 +113,7 @@ stations_ws <- function(station_number, parameters = c(46, 16, 52, 47, 8, 5, 41,
 
   csv_df <- dplyr::left_join(
     csv_df,
-    dplyr::select(param_id, -Name_Fr),
+    dplyr::select(tidyhydat.ws::param_id, -Name_Fr),
     by = c("Parameter")
   )
   csv_df <- dplyr::select(csv_df, STATION_NUMBER, Date, Name_En, Value, Unit, Grade, Symbol, Approval, Parameter, Code)

@@ -1,6 +1,7 @@
 tidyhydat.ws 0.1.5
 =========================
 * Make `realtime_ws` more flexible by allowing any numeric parameter input. 
+* Expand `param_id`
 
 tidyhydat.ws 0.1.4
 =========================

@@ -147,9 +147,13 @@ realtime_ws <- function(station_number, parameters = NULL,
   #       a separate request should be issued to include the excess stations. This second request can
   #       be issued on the same token if it isn't required.")
   #}
-  #browser()
 
   if (is.null(parameters)) parameters <- c(46, 16, 52, 47, 8, 5, 41, 18)
+
+  if (any(!parameters %in% param_id$Parameter)) {
+    stop(paste0(paste0(parameters[!parameters %in% tidyhydat.ws::param_id$Parameter], collapse = ","),
+                " are invalid parameters. Check param_id for a list of valid options."), call. = FALSE)
+  }
 
   if (!is.numeric(parameters)) stop("parameters should be a number", call. = FALSE)
 
@@ -273,6 +277,14 @@ realtime_ws <- function(station_number, parameters = NULL,
   } else {
     message("All station successfully retrieved")
   }
+
+  p_differ <- setdiff(unique(parameters), unique(csv_df$Parameter))
+  if (length(p_differ) != 0) {
+      message("The following valid parameter(s) were not retrieved for at least one station you requested: ", paste0(p_differ, sep = " "))
+  } else {
+    message("All parameters successfully retrieved")
+  }
+
 
   ## Return it
   csv_df
