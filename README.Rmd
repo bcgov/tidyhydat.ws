@@ -28,7 +28,7 @@ This package is maintained by the Data Science and Analytics Branch of the [Brit
 ## Installation
 ```{r, eval=FALSE}
 #install.packages("remotes")
-remotes::install_github("bcgov-c/tidyhydat.ws")
+remotes::install_github("bcgov/tidyhydat.ws")
 ```
 
 

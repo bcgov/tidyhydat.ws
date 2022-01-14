@@ -16,7 +16,7 @@ Services](https://www2.gov.bc.ca/gov/content/governments/organizational-structur
 
 ``` r
 #install.packages("remotes")
-remotes::install_github("bcgov-c/tidyhydat.ws")
+remotes::install_github("bcgov/tidyhydat.ws")
 ```
 
 ## Water Office web service - `realtime_ws()`
@@ -34,42 +34,20 @@ internal `param_id` dataset:
 library(tidyhydat.ws)
 data("param_id")
 param_id
-#>   Parameter Code                     Name_En                            Name_Fr
-#> 1        46   HG     Water level provisional            Niveau d'eau temporaire
-#> 2        16  HG2       Secondary water level            Niveau d'eau secondaire
-#> 3        52  HG3        Tertiary water level             Niveau d'eau tertiaire
-#> 4        47   QR       Discharge Provisional                D<e9>bit temporaire
-#> 5         8  QRS           Discharge, sensor                  D<e9>bit, capteur
-#> 6         5   TW           Water temperature            Temp<e9>rature de l'eau
-#> 7        41  TW2 Secondary water temperature Temp<e9>rature de l'eau secondaire
-#> 8        18   PC   Accumulated precipitation    Pr<e9>cipitations accumul<e9>es
-#>   Unit
-#> 1    m
-#> 2    m
-#> 3    m
-#> 4 m3/s
-#> 5 m3/s
-#> 6 degC
-#> 7 degC
-#> 8   mm
-#>                                                                                         Description_En
-#> 1 Height, stage, elevation of the water surface at a specified station above some arbitrary zero datum
-#> 2                     Height, stage, additional secondary water level reading at the specified station
-#> 3                      Height, stage, additional tertiary water level reading at the specified station
-#> 4                                                   Discharge - flow measured at points along a stream
-#> 5                                                                       s Discharge measured by sensor
-#> 6                                               Temperature, temperature of water at a specified depth
-#> 7                 Temperature, additional secondary water temperature reading at the specified station
-#> 8      Precipitation, accumulator - summation of precipitation collected beginning at a specified date
-#>                                                                                                                                                Description_Fr
-#> 1 Hauteur, niveau, <e9>l<e9>vation de la surface de l'eau <e0> une station sp<e9>cifi<e9>e au-dessus du z<e9>ro d'un syst<e8>me de r<e9>f<e9>rence arbitraire
-#> 2                                                           Hauteur, niveau, lecture secondaire additionnelle du niveau d'eau <e0> la station sp<e9>cifi<e9>e
-#> 3                                                            Hauteur, niveau, lecture tertiaire additionnelle du niveau d'eau <e0> la station sp<e9>cifi<e9>e
-#> 4                                                                                 D<e9>bit - <e9>coulement mesur<e9> <e0> des points le long d'un cours d'eau
-#> 5                                                                                                                              D<e9>bit mesur<e9> par capteur
-#> 6                                                                                 Temp<e9>rature, temp<e9>rature de l'eau <e0> une profondeur sp<e9>cifi<e9>e
-#> 7                                              Temp<e9>rature, lecture secondaire additionnelle de la temp<e9>rature de l'eau <e0> la station sp<e9>cifi<e9>e
-#> 8                                                   Pr<e9>cipitations, accumulateur - somme des pr<e9>cipitations recueillies depuis une date sp<e9>cifi<e9>e
+#> # A tibble: 42 x 7
+#>    Parameter Code  Unit  Name_En   Name_Fr    Description_En    Description_Fr  
+#>        <dbl> <chr> <chr> <chr>     <chr>      <chr>             <chr>           
+#>  1        46 HG    m     Water le~ Niveau d'~ Height, stage, e~ Hauteur, niveau~
+#>  2        16 HG2   m     Water le~ Niveau d'~ Height, stage, a~ Hauteur, niveau~
+#>  3        11 HG22  m     Water le~ Niveau d'~ Height, stage, a~ Hauteur, niveau~
+#>  4        52 HG3   m     Water le~ Niveau d'~ Height, stage, a~ Hauteur, niveau~
+#>  5        13 HG33  m     Water le~ Niveau d'~ Height, stage, a~ Hauteur, niveau~
+#>  6         3 HGD   m     Water le~ Niveau (m~ Provisional Dail~ niveau d'eau qu~
+#>  7        39 HGH   m     Water le~ Niveau (m~ Provisional hour~ Niveau d'eau ho~
+#>  8        14 HL    m     Elevatio~ Élévation~ Elevation, natur~ Élévation, lac ~
+#>  9        42 HR    m     Elevatio~ Élévation~ Elevation, lake ~ Élévation, cour~
+#> 10        17 PA    kPa   Atmosphe~ Pression ~ Pressure, atmosp~ Pression, atmos~
+#> # ... with 32 more rows
 ```
 
 The `parameters` argument will take any value in the
@@ -143,22 +121,22 @@ openly accessible .csv files from
 [here](http://dd.weather.gc.ca/hydrometric/). `realtime_ws()` has
 several difference to `realtime_dd()`. These include:
 
-  - *Speed*: `realtime_ws()` is much faster for larger queries
+-   *Speed*: `realtime_ws()` is much faster for larger queries
     (i.e. many stations). For single station queries `realtime_dd()` if
     more appropriate.
-  - *Length of record*: `realtime_ws()` records goes back further though
+-   *Length of record*: `realtime_ws()` records goes back further though
     only two months of data can accessed at one time. Though it varies
     for each station, typically the last 18 months of data are available
     with the web service.  
-  - *Type of parameters*: `realtime_dd()` is restricted to river flow
+-   *Type of parameters*: `realtime_dd()` is restricted to river flow
     (either LEVEL and FLOW) data. In contrast `realtime_ws()` can
     download several different parameters depending on what is available
     for that station. See `data("param_id")` for a list and explanation
     of the parameters.
-  - *Date/Time filtering*: `realtime_ws()` provides argument to select a
+-   *Date/Time filtering*: `realtime_ws()` provides argument to select a
     date range. Selecting a data range with `realtime_dd()` is not
     possible until after all files have been downloaded.
-  - *Accessibility*: `realtime_dd()` downloads data that openly
+-   *Accessibility*: `realtime_dd()` downloads data that openly
     accessible. `realtime_ws()` downloads data using a username and
     password which must be provided by ECCC.
 
