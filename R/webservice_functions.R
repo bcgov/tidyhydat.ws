@@ -246,23 +246,23 @@ realtime_ws <- function(station_number, parameters = NULL,
     get_ws,
     type = "text/csv",
     encoding = "UTF-8",
-    col_types = "cTidcci")
+    col_types = "cTidccccc") # Datatype of each 7 columns
 
   ## Check here to see if csv_df has any data in it
   if (nrow(csv_df) == 0) {
     stop("No data exists for this station query")
   }
 
-  ## Rename columns to reflect tidyhydat naming
-  colnames(csv_df) <- c("STATION_NUMBER","Date","Parameter","Value","Grade","Symbol","Approval")
+  ## Rename columns to reflect tidyhydat naming: renamed March 11, 2025
+  colnames(csv_df) <- c("STATION_NUMBER","Date","Parameter","Value","Qualifier","Symbol","Approval", "Grade", "Qualifiers")
 
   csv_df <- dplyr::left_join(
     csv_df,
     dplyr::select(tidyhydat.ws::param_id, -.data$Name_Fr),
     by = c("Parameter")
   )
-  csv_df <- dplyr::select(csv_df, .data$STATION_NUMBER, .data$Date, .data$Name_En, .data$Value, .data$Unit,
-                          .data$Grade, .data$Symbol, .data$Approval, .data$Parameter, .data$Code)
+  csv_df <- dplyr::select(csv_df, STATION_NUMBER, Date, Name_En, Value, Unit,
+                          Grade, Symbol, Approval, Parameter, Code)
 
   ## What stations were missed?
   differ <- setdiff(unique(station_number), unique(csv_df$STATION_NUMBER))
