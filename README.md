@@ -8,7 +8,7 @@
 
 ## Project Status
 
-This project is now deprecated. The functionality previously provided by this package is now available directly in [tidyhydat](https://docs.ropensci.org/tidyhydat/) as [version 0.6.0](https://docs.ropensci.org/tidyhydat/news/index.html#tidyhydat-060). Usage of the webservice is almost identical in tidyhydat. The sole difference is the exclusion of a `token` parameter. Instead, tidyhydat makes use of unathenticated calls to the webservice: 
+This project is now deprecated. The functionality previously provided by this package is now available directly in [`tidyhydat`](https://docs.ropensci.org/tidyhydat/) as [version 0.6.0](https://docs.ropensci.org/tidyhydat/news/index.html#tidyhydat-060). Usage of the webservice is almost identical in `tidyhydat`. The sole difference is the exclusion of a `token` parameter. Instead, `tidyhydat` makes use of unathenticated calls to the webservice: 
 
 ```r
 library(tidyhydat)
